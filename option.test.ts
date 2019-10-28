@@ -1,16 +1,16 @@
 import test from "tape";
 
-import { none, some } from "./option";
+import { None, Some } from "./option";
 
 test("#getOrElse", t => {
     t.equal(
-      none.getOrElse("some"),
+      None.getOrElse("some"),
       "some",
       "returns alternative value if argument is None",
     );
 
     t.equal(
-      some("one").getOrElse("two"),
+      Some("one").getOrElse("two"),
       "one",
       "returns argument value if argument is Some",
     );
@@ -21,52 +21,52 @@ test("#getOrElse", t => {
 //
 // describe("#equals", () => {
 //     it("returns true on same values", () => {
-//         expect(some(1)).toEqual(some(1));
+//         expect(Some(1)).toEqual(Some(1));
 //     });
 //     it("returns false on different values", () => {
-//         expect(some(1)).not.toEqual(some(2));
+//         expect(Some(1)).not.toEqual(Some(2));
 //     });
 //     it("is not None", () => {
-//         expect(some(1)).not.toEqual(none);
+//         expect(Some(1)).not.toEqual(None);
 //     });
 //     it("handles objects correctly", () => {
-//         expect(some({ one: 1 }).equals(some("[object Object]"))).toBeFalsy();
+//         expect(Some({ one: 1 }).equals(Some("[object Object]"))).toBeFalsy();
 //     });
-//     it("handles none correctly", () => {
-//         expect(none.equals(none)).toBeTruthy();
+//     it("handles None correctly", () => {
+//         expect(None.equals(None)).toBeTruthy();
 //     });
-//     it("none is not some", () => {
-//         expect(none.equals(some(10))).toBeFalsy();
+//     it("None is not Some", () => {
+//         expect(None.equals(Some(10))).toBeFalsy();
 //     });
 // });
 //
 // describe("#unit", () => {
 //     it("wraps value into Some", () => {
-//         expect(Option.unit(1)).toEqual(some(1));
+//         expect(Option.unit(1)).toEqual(Some(1));
 //     });
 //     it("of undefined is None", () => {
-//         expect(Option.unit(undefined)).toEqual(none);
+//         expect(Option.unit(undefined)).toEqual(None);
 //     });
 //     it("of null is None", () => {
-//         expect(Option.unit(null)).toEqual(none);
+//         expect(Option.unit(null)).toEqual(None);
 //     });
 // });
 //
 // describe("#map", () => {
 //     it("Option(value).map(fn) returns Option(fn(value))", () => {
-//         expect(some(1).map(x => x + 1).equals(some(2))).toBeTruthy();
+//         expect(Some(1).map(x => x + 1).equals(Some(2))).toBeTruthy();
 //     });
 //     it("None.map(fn) returns None", () => {
-//         expect(none.map(x => x + 1)).toEqual(none);
+//         expect(None.map(x => x + 1)).toEqual(None);
 //     });
 // });
 //
 // describe("#flatMap", () => {
-//     it("returns None if fn(x) == none", () => {
-//         expect(some(1).flatMap(() => none)).toEqual(none);
+//     it("returns None if fn(x) == None", () => {
+//         expect(Some(1).flatMap(() => None)).toEqual(None);
 //     });
 //     it("returns Some(y) if fn(x) == Some(y)", () => {
-//         expect(some(10).flatMap(x => some(x + 1))).toEqual(some(11));
+//         expect(Some(10).flatMap(x => Some(x + 1))).toEqual(Some(11));
 //     });
 // });
 //
@@ -76,8 +76,8 @@ test("#getOrElse", t => {
 //         expect(lifted).toBeInstanceOf(Function);
 //     });
 //     it("lifted(Optional) returns Optional with applied value", () => {
-//         const initialOptional = some(10);
-//         const expectedOptional = some(20);
+//         const initialOptional = Some(10);
+//         const expectedOptional = Some(20);
 //         expect(
 //           lifted(initialOptional).equals(expectedOptional)).toBeTruthy();
 //     });

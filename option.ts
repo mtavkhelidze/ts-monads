@@ -6,9 +6,9 @@ export abstract class Option<T> {
     // unit :: a -> Option a
     static unit<T>(value: T | null | undefined): Option<T> {
         if ((value === null) || (value === undefined)) {
-            return none;
+            return None;
         }
-        return new Some(value);
+        return new _Some(value);
     };
 
     abstract getOrElse(alternative: T): T;
@@ -23,7 +23,7 @@ export abstract class Option<T> {
     // flatMap<B>(f: (a: A) => Option<B>) {
     //     const r = f(this.value);
     //     // eslint-disable-next-line no-use-before-define
-    //     return r.equals(none) ? none : r;
+    //     return r.equals(None) ? None : r;
     // }
     //
     // // map :: # Option a -> (a -> b) -> Option b
@@ -53,7 +53,7 @@ export abstract class Option<T> {
     // }
 }
 
-export class Some<T> extends Option<T> {
+export class _Some<T> extends Option<T> {
     value: T;
     constructor(value: T) {
         super();
@@ -66,7 +66,7 @@ export class Some<T> extends Option<T> {
 
 
     equals(x: T) {
-        return x instanceof Some && x.value === this.value;
+        return x instanceof _Some && x.value === this.value;
     }
 
     toString() {
@@ -74,7 +74,7 @@ export class Some<T> extends Option<T> {
     }
 }
 
-export class None<T> extends Option<T> {
+export class _None<T> extends Option<T> {
     constructor() {
         super();
         delete this.value;
@@ -102,5 +102,5 @@ export class None<T> extends Option<T> {
 }
 
 // Cached None class value
-export const none: any = new None();
-export const some = <T>(x: T) => Some.unit(x);
+export const None: any = new _None();
+export const Some = <T>(x: T) => _Some.unit(x);
