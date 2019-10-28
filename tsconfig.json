@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "incremental": false,
+    "baseUrl": "./",
+    "lib": ["esnext"],
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "removeComments": false,
+    "sourceMap": true,
+    "noErrorTruncation": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowJs": false,
+    "skipLibCheck": false,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": false,
+    "noEmitOnError": false,
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules"]
+}
