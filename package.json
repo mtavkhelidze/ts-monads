@@ -1,12 +1,17 @@
 {
-  "name": "fp",
+  "name": "option-monad-js",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Option monad for JS/TS",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/tape": "^4.2.33",
+    "tape": "^4.11.0"
+  }
 }
