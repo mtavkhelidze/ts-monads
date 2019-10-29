@@ -12,6 +12,7 @@ export abstract class Option<T> {
     };
 
     abstract getOrElse(alternative: T): T;
+    abstract equals<R>(x: Option<R>): boolean;
 
     //
     // // ap :: # M a -> (a -> b) -> (M a -> M b)
@@ -65,7 +66,7 @@ export class _Some<T> extends Option<T> {
     }
 
 
-    equals(x: T) {
+    equals<R>(x: R): boolean {
         return x instanceof _Some && x.value === this.value;
     }
 
@@ -89,13 +90,10 @@ export class _None<T> extends Option<T> {
     //     return this;
     // }
 
-    // eslint-disable-next-line class-methods-use-this
-    equals(x: T) {
-        return x instanceof None;
+    equals<R>(x: R): boolean {
+        return x instanceof _None;
     }
 
-
-    // eslint-disable-next-line class-methods-use-this
     toString() {
         return "None";
     }

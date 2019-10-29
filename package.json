@@ -6,7 +6,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "typecheck:watch": "tsc --noEmit -w",
-    "test": "ts-node node_modules/tape/bin/tape option.test.ts"
+    "test": "ts-node node_modules/tape/bin/tape option.test.ts",
+    "test:watch": "nodemon -e ts -x 'npm test'"
   },
   "keywords": [],
   "author": "",

@@ -18,27 +18,41 @@ test("#getOrElse", t => {
     t.end();
 });
 
-//
-// describe("#equals", () => {
-//     it("returns true on same values", () => {
-//         expect(Some(1)).toEqual(Some(1));
-//     });
-//     it("returns false on different values", () => {
-//         expect(Some(1)).not.toEqual(Some(2));
-//     });
-//     it("is not None", () => {
-//         expect(Some(1)).not.toEqual(None);
-//     });
-//     it("handles objects correctly", () => {
-//         expect(Some({ one: 1 }).equals(Some("[object Object]"))).toBeFalsy();
-//     });
-//     it("handles None correctly", () => {
-//         expect(None.equals(None)).toBeTruthy();
-//     });
-//     it("None is not Some", () => {
-//         expect(None.equals(Some(10))).toBeFalsy();
-//     });
-// });
+
+test("#equals", t => {
+    t.true(
+      Some(1).equals(Some(1)),
+      "returns true on same values",
+    );
+
+    t.false(
+      Some(1).equals(Some(2)),
+      "returns false on different values",
+    );
+
+    t.false(
+      Some(1).equals(None),
+      "is not None",
+    );
+
+    t.false(
+      Some({ one: 1 }).equals(Some("[object Object]")),
+      "handles objects correctly",
+    );
+
+    t.true(
+      None.equals(None),
+      "handles None correctly",
+    );
+
+    t.false(
+      None.equals(Some(10)),
+      "None is not Some",
+    );
+
+    t.end();
+});
+
 //
 // describe("#unit", () => {
 //     it("wraps value into Some", () => {
