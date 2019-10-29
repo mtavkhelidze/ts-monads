@@ -1,6 +1,6 @@
 // See usage examples below
 
-export abstract class Option<T> {
+abstract class Option<T> {
     value?: T;
 
     // unit :: a -> Option a
@@ -54,7 +54,7 @@ export abstract class Option<T> {
     // }
 }
 
-export class _Some<T> extends Option<T> {
+class _Some<T> extends Option<T> {
     value: T;
     constructor(value: T) {
         super();
@@ -75,7 +75,7 @@ export class _Some<T> extends Option<T> {
     }
 }
 
-export class _None<T> extends Option<T> {
+class _None<T> extends Option<T> {
     constructor() {
         super();
         delete this.value;
