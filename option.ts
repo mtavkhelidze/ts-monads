@@ -1,9 +1,10 @@
 // See usage examples below
 
 abstract class Option<T> {
-    value?: T;
+    // @ts-ignore
+    value: T;
 
-    // unit :: a -> Option a
+    // unit :: a -> M a
     static unit<T>(value: T | null | undefined): Option<T> {
         if ((value === null) || (value === undefined)) {
             return None;
@@ -11,32 +12,28 @@ abstract class Option<T> {
         return new _Some(value);
     };
 
+    // getOrElse :: a -> a
     abstract getOrElse(alternative: T): T;
+
+    // equals :: M a -> Bool
     abstract equals<R>(x: Option<R>): boolean;
+
+    // flatMap :: (a -> M b) -> M b
+    flatMap<R>(f: (a: T) => Option<R>): Option<R> {
+        const r = f(this.value);
+        return r.equals(None) ? None : r;
+    }
+
+    // map :: (a -> b) -> Option b
+    map<R>(f: (x: T) => R): Option<R> {
+        return this.flatMap(x => Option.unit(f(x)));
+    }
 
     //
     // // ap :: # M a -> (a -> b) -> (M a -> M b)
     // static ap<T, R>(f: (a: T) => R) {
     //     return (ma: Option<T>) => ma.flatMap(a => Option.unit(f(a)));
     // }
-    //
-    // // flatMap :: # Option a -> (a -> Option b) -> Option b
-    // flatMap<B>(f: (a: A) => Option<B>) {
-    //     const r = f(this.value);
-    //     // eslint-disable-next-line no-use-before-define
-    //     return r.equals(None) ? None : r;
-    // }
-    //
-    // // map :: # Option a -> (a -> b) -> Option b
-    // map(f) {
-    //     return this.flatMap(x => Option.unit(f(x)));
-    // }
-    //
-    // // getOrElse :: # Option a -> b -> a | b
-    // getOrElse() {
-    //     return this.value;
-    // }
-    //
     // forEach(f) {
     //     f(this.value);
     // }
@@ -85,10 +82,9 @@ class _None<T> extends Option<T> {
         return alternative;
     }
 
-    //
-    // map() {
-    //     return this;
-    // }
+    map<R>(_: (x: T) => R): _None<R> {
+        return None;
+    }
 
     equals<R>(x: R): boolean {
         return x instanceof _None;
@@ -99,6 +95,6 @@ class _None<T> extends Option<T> {
     }
 }
 
-// Cached None class value
 export const None: any = new _None();
 export const Some = <T>(x: T) => _Some.unit(x);
+export const unit = Option.unit;

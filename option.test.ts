@@ -1,6 +1,6 @@
 import test from "tape";
 
-import { None, Some } from "./option";
+import { None, Some, unit } from "./option";
 
 test("#getOrElse", t => {
     t.equal(
@@ -17,7 +17,6 @@ test("#getOrElse", t => {
 
     t.end();
 });
-
 
 test("#equals", t => {
     t.true(
@@ -53,42 +52,59 @@ test("#equals", t => {
     t.end();
 });
 
-//
-// describe("#unit", () => {
-//     it("wraps value into Some", () => {
-//         expect(Option.unit(1)).toEqual(Some(1));
-//     });
-//     it("of undefined is None", () => {
-//         expect(Option.unit(undefined)).toEqual(None);
-//     });
-//     it("of null is None", () => {
-//         expect(Option.unit(null)).toEqual(None);
-//     });
-// });
-//
-// describe("#map", () => {
-//     it("Option(value).map(fn) returns Option(fn(value))", () => {
-//         expect(Some(1).map(x => x + 1).equals(Some(2))).toBeTruthy();
-//     });
-//     it("None.map(fn) returns None", () => {
-//         expect(None.map(x => x + 1)).toEqual(None);
-//     });
-// });
-//
-// describe("#flatMap", () => {
-//     it("returns None if fn(x) == None", () => {
-//         expect(Some(1).flatMap(() => None)).toEqual(None);
-//     });
-//     it("returns Some(y) if fn(x) == Some(y)", () => {
-//         expect(Some(10).flatMap(x => Some(x + 1))).toEqual(Some(11));
-//     });
-// });
+test("#unit", t => {
+    t.true(
+      unit(1).equals(Some(1)),
+      "wraps value into Some",
+    );
+
+    t.true(
+      unit(undefined).equals(None),
+      "of undefined is None",
+    );
+
+    t.true(
+      unit(null).equals(None),
+      "of null is None",
+    );
+
+    t.end();
+});
+
+test("#flatMap", t => {
+    t.equal(
+      Some(1).flatMap(() => None), None,
+      "returns None if fn(x) == None",
+    );
+
+    t.true(
+      Some(10).flatMap(x => Some(x + 1)).equals(Some(11)),
+      "returns Some(y) if fn(x) == Some(y)",
+    );
+
+    t.end();
+});
+
+test("#map", t => {
+    t.true(
+      Some(1).map(x => x + 1).equals(Some(2)),
+      "Option(value).map(fn) returns Option(fn(value))",
+    );
+
+    t.equal(None.map((x: number) => x + 1), None,
+      "None.map(fn) returns None",
+    );
+
+    t.end();
+});
+
 //
 // describe("#ap", () => {
 //     const lifted = Option.ap(x => x * 2);
 //     it("lifts a function to accept Optional", () => {
 //         expect(lifted).toBeInstanceOf(Function);
 //     });
+
 //     it("lifted(Optional) returns Optional with applied value", () => {
 //         const initialOptional = Some(10);
 //         const expectedOptional = Some(20);
