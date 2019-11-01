@@ -4,7 +4,6 @@ abstract class Option<T> {
     // @ts-ignore
     value: T;
 
-    // unit :: a -> M a
     static unit<T>(value: T | null | undefined): Option<T> {
         if ((value === null) || (value === undefined)) {
             return None;
@@ -12,15 +11,11 @@ abstract class Option<T> {
         return new _Some(value);
     };
 
-    // getOrElse :: a -> a
     abstract getOrElse(alternative: T): T;
 
-    // equals :: M a -> Bool
     abstract equals<R>(x: Option<R>): boolean;
 
-    // forEach :: F
     abstract forEach(f: (t: T) => void): void;
-
 
     // flatMap :: (a -> M b) -> M b
     flatMap<R>(f: (a: T) => Option<R>): Option<R> {
@@ -33,24 +28,10 @@ abstract class Option<T> {
         return this.flatMap(x => Option.unit(f(x)));
     }
 
-    //
-    // // ap :: # M a -> (a -> b) -> (M a -> M b)
-    // static ap<T, R>(f: (a: T) => R) {
-    //     return (ma: Option<T>) => ma.flatMap(a => Option.unit(f(a)));
-    // }
-
-    //
-    // //  # M a => (a -> bool) -> (a -> m b) -> (a -> m c) -> m b | mc
-    // ifElse(fcond, f1, f2) {
-    //     return this.map(fcond).map(x => x ? f1(this.value) : f2(this.value));
-    // }
-    //
-    // // # M a => a -> m a + console.log(a)
-    // debug(tag = "") {
-    //     // eslint-disable-next-line no-console
-    //     console.log(tag, this.toString());
-    //     return this;
-    // }
+    debug(tag: string = ""): Option<T> {
+        console.log(tag, this.toString());
+        return this;
+    }
 }
 
 class _Some<T> extends Option<T> {

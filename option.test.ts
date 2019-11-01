@@ -2,7 +2,7 @@ import test from "tape";
 
 import { None, Some, unit } from "./option";
 
-test("#getOrElse", t => {
+test("getOrElse", t => {
     t.equal(
       None.getOrElse("some"),
       "some",
@@ -18,7 +18,7 @@ test("#getOrElse", t => {
     t.end();
 });
 
-test("#equals", t => {
+test("equals", t => {
     t.true(
       Some(1).equals(Some(1)),
       "returns true on same values",
@@ -52,7 +52,7 @@ test("#equals", t => {
     t.end();
 });
 
-test("#unit", t => {
+test("unit", t => {
     t.true(
       unit(1).equals(Some(1)),
       "wraps value into Some",
@@ -71,7 +71,7 @@ test("#unit", t => {
     t.end();
 });
 
-test("#flatMap", t => {
+test("flatMap", t => {
     t.equal(
       Some(1).flatMap(() => None), None,
       "returns None if fn(x) == None",
@@ -85,7 +85,7 @@ test("#flatMap", t => {
     t.end();
 });
 
-test("#map", t => {
+test("map", t => {
     t.true(
       Some(1).map(x => x + 1).equals(Some(2)),
       "Option(value).map(fn) returns Option(fn(value))",
@@ -98,7 +98,7 @@ test("#map", t => {
     t.end();
 });
 
-test("#forEach", t => {
+test("forEach", t => {
     const xs: number[] = [];
     const op = unit(10);
 
@@ -115,17 +115,3 @@ test("#forEach", t => {
     t.equal(xs.length, 1, "doesn't do anything if Option is None");
     t.end();
 });
-//
-// describe("#ap", () => {
-//     const lifted = Option.ap(x => x * 2);
-//     it("lifts a function to accept Optional", () => {
-//         expect(lifted).toBeInstanceOf(Function);
-//     });
-
-//     it("lifted(Optional) returns Optional with applied value", () => {
-//         const initialOptional = Some(10);
-//         const expectedOptional = Some(20);
-//         expect(
-//           lifted(initialOptional).equals(expectedOptional)).toBeTruthy();
-//     });
-// });
