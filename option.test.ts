@@ -98,6 +98,23 @@ test("#map", t => {
     t.end();
 });
 
+test("#forEach", t => {
+    const xs: number[] = [];
+    const op = unit(10);
+
+    op.forEach(x => {
+        xs.push(x * 2);
+    });
+
+    t.equal(xs[0], 20, "applies supplied function to value in Some");
+
+    op.flatMap<number>(_ => None).forEach(x => {
+        xs.push(x);
+    });
+
+    t.equal(xs.length, 1, "doesn't do anything if Option is None");
+    t.end();
+});
 //
 // describe("#ap", () => {
 //     const lifted = Option.ap(x => x * 2);

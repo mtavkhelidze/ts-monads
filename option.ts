@@ -18,6 +18,10 @@ abstract class Option<T> {
     // equals :: M a -> Bool
     abstract equals<R>(x: Option<R>): boolean;
 
+    // forEach :: F
+    abstract forEach(f: (t: T) => void): void;
+
+
     // flatMap :: (a -> M b) -> M b
     flatMap<R>(f: (a: T) => Option<R>): Option<R> {
         const r = f(this.value);
@@ -34,9 +38,7 @@ abstract class Option<T> {
     // static ap<T, R>(f: (a: T) => R) {
     //     return (ma: Option<T>) => ma.flatMap(a => Option.unit(f(a)));
     // }
-    // forEach(f) {
-    //     f(this.value);
-    // }
+
     //
     // //  # M a => (a -> bool) -> (a -> m b) -> (a -> m c) -> m b | mc
     // ifElse(fcond, f1, f2) {
@@ -53,6 +55,7 @@ abstract class Option<T> {
 
 class _Some<T> extends Option<T> {
     value: T;
+
     constructor(value: T) {
         super();
         this.value = value;
@@ -69,6 +72,10 @@ class _Some<T> extends Option<T> {
 
     toString() {
         return `Some(${this.value})`;
+    }
+
+    forEach(f: (t: T) => void): void {
+        f(this.value);
     }
 }
 
@@ -92,6 +99,10 @@ class _None<T> extends Option<T> {
 
     toString() {
         return "None";
+    }
+
+    forEach(_: (t: T) => void): void {
+        // nothing
     }
 }
 
