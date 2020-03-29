@@ -1,5 +1,5 @@
 {
-  "name": "option-monad-js",
+  "name": "ts-monads",
   "version": "1.0.0",
   "description": "Option monad for JS/TS",
   "main": "./dist/index.js",
