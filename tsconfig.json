@@ -2,6 +2,7 @@
   "compilerOptions": {
     "incremental": false,
     "baseUrl": "./",
+    "outDir": "dist",
     "lib": ["esnext"],
     "target": "es5",
     "module": "commonjs",
@@ -17,7 +18,8 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": false,
     "noEmitOnError": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "declaration": true
   },
   "exclude": ["node_modules"]
 }

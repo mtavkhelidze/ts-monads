@@ -7,7 +7,8 @@
   "scripts": {
     "typecheck:watch": "tsc --noEmit -w",
     "test": "ts-node node_modules/tape/bin/tape option.test.ts",
-    "test:watch": "nodemon -e ts -x 'npm test'"
+    "test:watch": "nodemon -e ts -x 'npm test'",
+    "postinstall": "tsc"
   },
   "keywords": [],
   "author": "",
