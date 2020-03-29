@@ -1,6 +1,6 @@
 // See usage examples below
 
-abstract class Option<T> {
+export abstract class Option<T> {
     // @ts-ignore
     value: T;
 
