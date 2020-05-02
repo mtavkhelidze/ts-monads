@@ -11,7 +11,7 @@ export abstract class Option<T> {
         return new _Some(value);
     };
 
-    abstract getOrElse(alternative: T): T;
+    abstract getOrElse<R>(alternative: T): T | R;
 
     abstract equals<R>(x: Option<R>): boolean;
 
