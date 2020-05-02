@@ -42,7 +42,7 @@ class _Some<T> extends Option<T> {
         this.value = value;
     }
 
-    getOrElse(_: T): T {
+    getOrElse<R>(_: R): T {
         return this.value;
     }
 
@@ -66,7 +66,7 @@ class _None<T> extends Option<T> {
         delete this.value;
     }
 
-    getOrElse(alternative: T): T {
+    getOrElse<R>(alternative: R): R {
         return alternative;
     }
 
