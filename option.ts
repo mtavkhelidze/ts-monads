@@ -1,5 +1,3 @@
-// See usage examples below
-
 export abstract class Option<T> {
     // @ts-ignore
     value: T;
