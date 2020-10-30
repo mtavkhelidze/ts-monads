@@ -61,7 +61,6 @@ class _Some<T> extends Option<T> {
 class _None<T> extends Option<T> {
     constructor() {
         super();
-        delete this.value;
     }
 
     getOrElse<R>(alternative: R): R {
