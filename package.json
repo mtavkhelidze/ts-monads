@@ -5,16 +5,19 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "typecheck:watch": "tsc --noEmit -w",
-    "test": "ts-node node_modules/tape/bin/tape option.test.ts",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "postinstall": "npm run clean; npm run build",
+    "test": "ts-node node_modules/tape/bin/tape src/*.test.ts",
     "test:watch": "nodemon -e ts -x 'npm test'",
-    "postinstall": "tsc"
+    "typecheck:watch": "tsc --noEmit -w"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@types/tape": "^4.13.2",
+    "rimraf": "^3.0.2",
     "tape": "^5.5.3",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
